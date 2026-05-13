@@ -21,6 +21,8 @@ class Note(db.Model):
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    with app.app_context():
+        db.create_all()
 
     if request.method == "POST":
         note_text = request.form["content"]
@@ -52,6 +54,8 @@ def home():
             <a href='/delete/{note.id}'>Delete</a>
         </p>
         """
+
+
 
     return html
 
